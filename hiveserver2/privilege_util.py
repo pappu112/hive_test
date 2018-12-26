@@ -90,7 +90,6 @@ def check_hive_privilege(database="", table="", type='SELECT',region=Region['cn'
 
 
 def check_sentry_privilege(username, database, table, type, region):
-    print 'check sentry privilege ', username, database, table, type, region
     is_psm = __is_psm_name(username)
     if is_psm:
         data = {
@@ -149,7 +148,6 @@ class HiveThriftPrivilegeClient(Iface):
         self.token = token
         self.user = user
         token_pass = self.set_token()
-        print "set token ", token_pass
         if token_pass == False:
             raise Exception("invalidate token, contact hive administrator")
 
