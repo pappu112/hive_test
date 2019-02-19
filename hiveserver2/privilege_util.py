@@ -128,7 +128,7 @@ def check_sentry_privilege(username, database, table, type, region):
         except requests.exceptions.Timeout:
             print "WARN: timeout retry:" + str(retry + 1) + "/" + str(HTTP_RETRY)
         except Exception, err:
-            print "WARN:" + err.message
+            print "WARN:" + str(err)
         retry = retry + 1
     if result is None:
         return
