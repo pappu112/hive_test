@@ -8,7 +8,7 @@ sys.setdefaultencoding("utf-8")
 from pyhive.hiveserver2.metastore import HiveThriftContext, HiveMetastoreClient
 from pyhive.hiveserver2 import connect
 
-psm_i18n = 'data.olap.hms-i18n-test.service.maliva.byted.org'
+psm_i18n = 'data.olap.hms_py_i18n.service.maliva.byted.org'
 psm_china = 'data.olap.hms-py.service.lf.byted.org'
 
 # test HiveThriftContext
