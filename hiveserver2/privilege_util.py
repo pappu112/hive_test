@@ -547,3 +547,6 @@ class HiveThriftPrivilegeClient(Iface):
 
     def show_compact(self, rqst):
         return self.thriftClient.show_compact(rqst)
+
+    def get_oldest_partition(self, db_name, tbl_name):
+        return self.thriftClient.get_oldest_partition(db_name, tbl_name)
