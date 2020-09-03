@@ -18,7 +18,7 @@ import requests
 import random
 
 
-# so we can do with different cluster toutiao(china),or i18n
+# so we can do with different cluster
 env_dist = os.environ # environ是在os.py中定义的一个dict environ = {}
 
 is_public_service = False

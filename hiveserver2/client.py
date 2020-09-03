@@ -249,7 +249,6 @@ class HiveServer2Client(object):
         self._session = None
 
         use_sasl, mechanism, kerberos_principal_short_name = self.get_security()
-        self._sentry_client = raven.Client(CONF.sentry_dsn)
         self._client = get_client(TCLIService.Client,
                                   self.host,
                                   self.port,
@@ -315,7 +314,7 @@ class HiveServer2Client(object):
         return use_sasl, mechanism, kerberos_principal_short_name
 
     def cursor(self, operation_handle=None, operation_string=None):
-        cursor = HiveServer2Cursor(self, self._sentry_client, operation_handle, operation_string, buffer_size=self.buffer_size)
+        cursor = HiveServer2Cursor(self, None, operation_handle, operation_string, buffer_size=self.buffer_size)
         if self.default_db:
             cursor.execute("USE {}".format(self.default_db))
         return cursor

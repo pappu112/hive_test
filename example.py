@@ -9,7 +9,7 @@ from pyhive.hiveserver2.metastore import HiveThriftContext, HiveMetastoreClient
 from pyhive.hiveserver2 import connect
 
 psm_i18n = 'data.olap.hms_py_i18n.service.maliva.byted.org'
-psm_china = 'data.olap.hms-py.service.lf.byted.org'
+psm_default = 'data.olap.hms-py.service.lf.byted.org'
 
 # test HiveThriftContext
 # test psm
@@ -86,19 +86,5 @@ if __name__ == '__main__':
     print "test i18n"
     test_metastore(psm_i18n)
 
-    print "\n test china"
-    test_metastore(psm_china)
-
-
-    #test_metastore2(psm_i18n)
-    #print '\n'
-    #test_metastore(psm_china)
-    #print '\n'
-    #test_metastore2(psm_china)
-    #print '\n'
-
-    # hiveserver2
-    #print "\n*********\ncheck i18 hiveserver2"
-    #test_hiveserver2('i18n_default')
-    #print "\n*********\ncheck china hiveserver2"
-    #test_hiveserver2('haruna_default')
+    print "\n test"
+    test_metastore(psm_default)
