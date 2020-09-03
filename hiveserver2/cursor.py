@@ -16,7 +16,8 @@ DEFAULT_BUFFER_SIZE = 32
 MAX_RESULTS_SIZE = 128 * 1024 * 1024
 
 class HiveServer2Cursor(object):
-    def __init__(self, client, sentry_client=None, operation_handle=None, operation_string=None, buffer_size=DEFAULT_BUFFER_SIZE):
+    def __init__(self, client, sentry_client=None,
+                 operation_handle=None, operation_string=None, buffer_size=DEFAULT_BUFFER_SIZE):
         self.client = client
 
         self._last_operation_handle = operation_handle
