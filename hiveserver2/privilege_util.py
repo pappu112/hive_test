@@ -40,9 +40,9 @@ if env_dist.has_key('DEBUG_USER_NAME'):
     debug_user_name = env_dist['DEBUG_USER_NAME']
 
 EE_WHITELIST = ["tiger", "root"]
-Region = {"cn": "china","va": "i18n"}
+Region = {"default": "default", "va": "i18n"}
 GeminiPsm = {
-    "cn": "data.olap.gemini-server.service.lf",
+    "default": "data.olap.gemini-server.service.lf",
     "va": "data.olap.gemini-server-i18n.service.maliva"
 }
 GEMINI_URL_USER='/api/query/{}/verifyUserPri/'
@@ -53,8 +53,7 @@ HTTP_RETRY=2
 TAKE_EFFECT_REGION=['i18n']
 
 
-
-def get_host_port_from_psm(psm=GeminiPsm['cn']):
+def get_host_port_from_psm(psm=GeminiPsm['default']):
     server_list = translate_one(psm)
     if not server_list or len(server_list) == 0:
         raise Exception("no server found for {}".format(psm))
@@ -76,7 +75,7 @@ def __is_psm_name(user_name):
         return False
 
 
-def check_hive_privilege(database="", table="", type='SELECT',region=Region['cn'], username = 'not_set'):
+def check_hive_privilege(database="", table="", type='SELECT', region=Region['default'], username='not_set'):
     if is_public_service:
         return
     if region not in TAKE_EFFECT_REGION:
@@ -108,8 +107,8 @@ def check_sentry_privilege(username, database, table, type, region):
         }
         URL = GEMINI_URL_USER
 
-    if region == Region['cn']:
-        psm = GeminiPsm['cn']
+    if region == Region['default']:
+        psm = GeminiPsm['default']
     else:
         psm = GeminiPsm['va']
     retry = 0
@@ -142,7 +141,7 @@ def check_sentry_privilege(username, database, table, type, region):
 
 
 class HiveThriftPrivilegeClient(Iface):
-    def __init__(self, thriftClient, region='cn', token="not_set", user="not_set"):
+    def __init__(self, thriftClient, region='default', token="not_set", user="not_set"):
         self.thriftClient = thriftClient
         self.region = region
         self.token = token
