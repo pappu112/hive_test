@@ -46,11 +46,11 @@ def init_metrics(metrics_namespace_prefix=Config['metrics_namespace_prefix']):
 
 def _get_region_from_hms_ip(host):
     if host == Config["metastore_host"]:
-        return Region["cn"]
+        return Region["default"]
     if host.startswith("10.100") or host.startswith("10.110") or host.startswith("10.120"):
         return Region["va"]
     else:
-        return Region["cn"]
+        return Region["default"]
 
 
 class HiveThriftContext(object):
