@@ -22,7 +22,7 @@ from privilege_util import Region
 Config = {
     "metastore_host": "hive-metastore.m.byted.org",
     "metastore_port": 9083,
-    "metastore_psm": "data.olap.hms-py.service.lf",
+    "metastore_psm": "data.olap.catalogservice",
     "metrics_namespace_prefix": "toutiao.service.thrift.data.olap.hms_cli"
 }
 
