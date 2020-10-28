@@ -153,6 +153,9 @@ class HiveThriftPrivilegeClient(Iface):
     def set_token(self):
         return self.thriftClient.set_token(self.token)
 
+    def set_token_by_user(self, user_token):
+        return self.thriftClient.set_token(user_token)
+
     def create_database(self, database):
         raise Exception("Create database in client is not allowed, please contact to hive administrator;")
 
