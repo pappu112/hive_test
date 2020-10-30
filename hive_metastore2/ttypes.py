@@ -7,7 +7,6 @@
 #
 
 from thrift.Thrift import TType, TMessageType, TException, TApplicationException
-import fb303.ttypes
 
 
 from thrift.transport import TTransport
