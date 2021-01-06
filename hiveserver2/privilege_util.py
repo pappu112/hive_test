@@ -157,6 +157,9 @@ class HiveThriftPrivilegeClient(Iface):
         return self.thriftClient.set_token(user_token)
 
     def create_database(self, database):
+        namespace_and_dbname = database.name.split('.')
+        if len(namespace_and_dbname) == 2 and namespace_and_dbname[0].lower() == 'bmq'.lower():
+            return self.thriftClient.create_database(database)
         raise Exception("Create database in client is not allowed, please contact to hive administrator;")
 
     def get_database(self, name):
@@ -197,6 +200,9 @@ class HiveThriftPrivilegeClient(Iface):
         return self.thriftClient.get_schema(db_name, table_name)
 
     def create_table(self, tbl):
+        namespace_and_dbname = tbl.dbName.split('.')
+        if len(namespace_and_dbname) == 2 and namespace_and_dbname[0].lower() == 'bmq'.lower():
+            return self.thriftClient.create_table(tbl)
         pass
 
     def create_table_with_environment_context(self, tbl, environment_context):
