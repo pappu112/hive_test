@@ -13,8 +13,8 @@ psm_default = 'data.olap.catalogservice.service.lf.byted.org'
 
 def test_metastore(psm=''):
     num = 10
-    database = 'origin_log'
-    table = 'event_log_hourly'
+    database = 'aim'
+    table = 'input_data'
     with HiveThriftContext(metastore_psm=psm) as client:
 
         # get partition
