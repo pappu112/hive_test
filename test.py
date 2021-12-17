@@ -6,8 +6,7 @@ DATABASE_NAME = 'aim'
 TABLE_NAME = 'input_data'
 with HiveThriftContext(metastore_psm=psm) as client:
     try:
-         parts = client.get_partition_by_name(DATABASE_NAME, TABLE_NAME,
-                                                 "date={}".format(day))
+         parts = client.get_partition_by_name(DATABASE_NAME, TABLE_NAME,"date={}".format(day))
             return parts
         except Exception:
             traceback.print_stack()
