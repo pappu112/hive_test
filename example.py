@@ -11,7 +11,7 @@ psm_default = 'data.olap.catalogservice.service.lf.byted.org'
 # test psm
 # test do not cache exception
 
-def test_metastore(psm=''):
+def test_metastore(psm='gta.svt.aim'):
     num = 10
     database = 'aim'
     table = 'input_data'
