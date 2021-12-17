@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+#coding: utf-8
+
+
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-from hiveserver2.metastore import HiveThriftContext, HiveMetastoreClient
-from hiveserver2 import connect
+from pyhive.hiveserver2.metastore import HiveThriftContext, HiveMetastoreClient
+from pyhive.hiveserver2 import connect
 
 psm_i18n = 'data.olap.hms_py_i18n.service.maliva.byted.org'
 psm_default = 'data.olap.catalogservice.service.lf.byted.org'
@@ -10,11 +14,10 @@ psm_default = 'data.olap.catalogservice.service.lf.byted.org'
 # test HiveThriftContext
 # test psm
 # test do not cache exception
-
 def test_metastore(psm=''):
     num = 10
-    database = 'aim'
-    table = 'input_data'
+    database = 'origin_log'
+    table = 'event_log_hourly'
     with HiveThriftContext(metastore_psm=psm) as client:
 
         # get partition
@@ -51,3 +54,37 @@ def test_metastore(psm=''):
         # get_partition_names
         res = client.get_partition_names(database, table, num)
         print res, "\n"
+
+
+
+# test HiveMetastoreClient
+# test psm
+# test do not cache exception
+def test_metastore2(psm=''):
+    num = 10
+    client = HiveMetastoreClient(metastore_psm=psm)
+    try:
+        res = client.get_table_partitions("event_log_hourly", "origin_log", num)
+        print res
+    except Exception as e:
+        print "get partition", e
+
+
+def test_hiveserver2(cluster='i18n_default'):
+    sql = "show tables"
+    with connect('hive', cluster=cluster, username='ouchengeng') as client:
+        with client.cursor() as cursor:
+            cursor.execute(sql, configuration={'mapreduce.job.name': 'ouchengeng', 'mapreduce.job.priority': 'NORMAL',
+                                               'yarn.cluster.name': 'default',
+                                               'mapreduce.job.queuename': 'root.data.etl'})
+            print cursor.fetchall()
+
+
+
+if __name__ == '__main__':
+    # metastore
+    print "test i18n"
+    test_metastore(psm_i18n)
+
+    print "\n test"
+    test_metastore(psm_default)
