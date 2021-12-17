@@ -4,14 +4,14 @@ sys.setdefaultencoding("utf-8")
 from hiveserver2.metastore import HiveThriftContext, HiveMetastoreClient
 from hiveserver2 import connect
 
-psm_i18n = 'data.olap.hms_py_i18n.service.maliva.byted.org'
-psm_default = 'data.olap.catalogservice.service.lf.byted.org'
+psm_i18n = 'gta.svt.aim'
+# psm_default = 'data.olap.catalogservice.service.lf.byted.org'
 
 # test HiveThriftContext
 # test psm
 # test do not cache exception
 
-def test_metastore(psm='gta.svt.aim'):
+def test_metastore(psm=''):
     num = 10
     database = 'aim'
     table = 'input_data'
@@ -77,5 +77,5 @@ if __name__ == '__main__':
     print "test i18n"
     test_metastore(psm_i18n)
 
-    print "\n test"
-    test_metastore(psm_default)
+    # print "\n test"
+    # test_metastore(psm_default)
