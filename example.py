@@ -51,3 +51,31 @@ def test_metastore(psm=''):
         # get_partition_names
         res = client.get_partition_names(database, table, num)
         print res, "\n"
+def test_metastore2(psm=''):
+    num = 10
+    client = HiveMetastoreClient(metastore_psm=psm)
+    try:
+        res = client.get_table_partitions("event_log_hourly", "origin_log", num)
+        print res
+    except Exception as e:
+        print "get partition", e
+
+
+def test_hiveserver2(cluster='i18n_default'):
+    sql = "show tables"
+    with connect('hive', cluster=cluster, username='ouchengeng') as client:
+        with client.cursor() as cursor:
+            cursor.execute(sql, configuration={'mapreduce.job.name': 'ouchengeng', 'mapreduce.job.priority': 'NORMAL',
+                                               'yarn.cluster.name': 'default',
+                                               'mapreduce.job.queuename': 'root.data.etl'})
+            print cursor.fetchall()
+
+
+
+if __name__ == '__main__':
+    # metastore
+    print "test i18n"
+    test_metastore(psm_i18n)
+
+    print "\n test"
+    test_metastore(psm_default)
